@@ -51,7 +51,21 @@
   .hero-line { position: absolute; top: 0; bottom: 0; width: 0.5px; background: linear-gradient(to bottom, transparent, var(--accent-border), transparent); }
   .hero-line:nth-child(1) { left: 33%; }
   .hero-line:nth-child(2) { left: 66%; }
-  .hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; width: 100%; }
+  .hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; }
+  .hero-left { grid-column: 1; }
+  .hero-patchwork {
+    grid-column: 2; width: 260px; height: 340px;
+    border: 1px dashed var(--accent-border);
+    background: var(--noir-card);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.8rem; padding: 1.5rem; text-align: center; flex-shrink: 0;
+    overflow: hidden;
+  }
+  .hero-patchwork-icon { font-size: 2rem; opacity: 0.25; }
+  .hero-patchwork p { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); line-height: 1.7; }
+  .hero-patchwork small { font-size: 0.62rem; color: #444; }
+  .hero-patchwork img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .hero-tag { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
   .hero-tag::before { content: ''; width: 36px; height: 0.5px; background: var(--accent); display: block; }
   .hero-name { font-family: var(--serif); font-size: clamp(3.2rem, 8vw, 7rem); font-weight: 700; line-height: 0.95; margin-bottom: 0.6rem; }
@@ -198,21 +212,42 @@
   <div class="hero-line"></div>
   <div class="hero-line"></div>
   <div class="hero-inner">
-    <div class="hero-tag">Chef de projet créatif · Réalisateur</div>
-    <h1 class="hero-name">Jil-Arnaud<br><em>Koumba</em></h1>
-    <p class="hero-subtitle">Ingénieur de formation. Créateur de vocation.</p>
-    <p class="hero-desc">
-      Je construis des histoires avec la même rigueur que des systèmes.<br>
-      <strong>6 ans à écrire, produire, filmer, diriger et monter</strong> — en parallèle d'un parcours d'ingénieur. Aujourd'hui, je mets cette double compétence au service de l'audiovisuel.
-    </p>
-    <div class="hero-actions">
-      <a href="#presentation" class="btn-gold">Voir ma présentation</a>
-      <a href="#contact" class="btn-outline">Me contacter</a>
+    <div class="hero-left">
+      <div class="hero-tag">Chef de projet créatif · Réalisateur</div>
+      <h1 class="hero-name">Jil-Arnaud<br><em>Koumba</em></h1>
+      <p class="hero-subtitle">Ingénieur de formation. Créateur de vocation.</p>
+      <p class="hero-desc">
+        Je construis des histoires avec la même rigueur que des systèmes.<br>
+        <strong>6 ans à écrire, produire, filmer, diriger et monter</strong> — en parallèle d'un parcours d'ingénieur. Aujourd'hui, je mets cette double compétence au service de l'audiovisuel.
+      </p>
+      <div class="hero-actions">
+        <a href="#presentation" class="btn-gold">Voir ma présentation</a>
+        <a href="#contact" class="btn-outline">Me contacter</a>
+      </div>
+      <div class="hero-counters" style="position:relative; right:auto; bottom:auto; margin-top:3rem;">
+        <div class="counter" style="text-align:left;"><span class="counter-num">4</span><div class="counter-label">Courts métrages</div></div>
+        <div class="counter" style="text-align:left;"><span class="counter-num">10</span><div class="counter-label">Épisodes série</div></div>
+        <div class="counter" style="text-align:left;"><span class="counter-num">6</span><div class="counter-label">Ans de création</div></div>
+      </div>
     </div>
-    <div class="hero-counters">
-      <div class="counter"><span class="counter-num">4</span><div class="counter-label">Courts métrages</div></div>
-      <div class="counter"><span class="counter-num">10</span><div class="counter-label">Épisodes série</div></div>
-      <div class="counter"><span class="counter-num">6</span><div class="counter-label">Ans de création</div></div>
+
+    <!--
+    ╔══════════════════════════════════════════════════════════╗
+    ║  CADRE PATCHWORK — COMMENT AJOUTER TON IMAGE            ║
+    ║                                                          ║
+    ║  Option A — une image patchwork déjà composée :         ║
+    ║    Supprime le contenu du div .hero-patchwork            ║
+    ║    et remplace par :                                     ║
+    ║    <img src="patchwork.jpg" alt="Œuvres">               ║
+    ║                                                          ║
+    ║  Option B — tu veux garder le placeholder pour l'instant ║
+    ║    Laisse tel quel                                       ║
+    ╚══════════════════════════════════════════════════════════╝
+    -->
+    <div class="hero-patchwork">
+      <div class="hero-patchwork-icon">🎬</div>
+      <p>Patchwork<br>de tes œuvres</p>
+      <small>Ajouter une image composée<br>des miniatures & covers</small>
     </div>
   </div>
 </section>
@@ -269,8 +304,8 @@
     </div>
     <div class="vision-layout">
       <div class="vision-body">
-        <p>Diplômé ingénieur en <strong>IoT & Smart Cities</strong>, j'ai passé 6 ans à mener deux vies en parallèle : celle d'un professionnel structuré chez EDF et Epresspack, et celle d'un créateur qui écrit, tourne et monte ses propres œuvres.</p>
-        <p>J'ai produit des courts métrages, une série de 10 épisodes, un clip animé, des performances de stand-up. <strong>Pas des projets d'école. Des œuvres abouties, publiées, montrées.</strong></p>
+        <p>Diplômé ingénieur en <strong>IoT & Smart Cities</strong>, j'ai passé 6 ans à mener deux vies en parallèle : celle d'un professionnel structuré chez EDF et Epresspack, et celle d'un créateur qui écrit, dessine, tourne, monte et publie ses propres œuvres.</p>
+        <p>J'ai produit des courts métrages, une série Youtube de 10 épisodes, les visuels animés d'un clip musical pour une amie artiste, des performances de stand-up. <strong>Pas des projets d'école. Des œuvres abouties, publiées, montrées.</strong></p>
         <p>Aujourd'hui, je veux franchir l'étape suivante : entrer dans l'industrie audiovisuelle avec la rigueur d'un chef de projet et la vision d'un réalisateur.</p>
         <div class="vision-quote">
           <p>« Je ne veux pas choisir entre la structure et la créativité — c'est précisément cette tension qui définit ce que je veux apporter. »</p>
@@ -303,13 +338,12 @@
     </div>
     <div class="oeuvres-grid">
 
-      <!-- The Last Summer — grande carte -->
+      <!-- 1. The Last Summer — grande carte -->
       <div class="oeuvre wide" onclick="window.open('LIEN_YOUTUBE_THE_LAST_SUMMER','_blank')">
         <div class="oeuvre-thumb">
-          <!-- Ajouter style="background-image:url('thumbnail-last-summer.jpg')" sur la ligne suivante -->
           <div class="oeuvre-thumb-bg bg-serie"></div>
           <div class="play-wrap"><div class="play-tri-sm"></div></div>
-          <div class="oeuvre-badge">Série · 10 épisodes</div>
+          <div class="oeuvre-badge">Série Youtube · 10 épisodes</div>
         </div>
         <div class="oeuvre-body">
           <div class="oeuvre-title">The Last Summer</div>
@@ -317,6 +351,7 @@
         </div>
       </div>
 
+      <!-- 2. The Fantastic Tale of Surfer Boy -->
       <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_SURFER_BOY','_blank')">
         <div class="oeuvre-thumb">
           <div class="oeuvre-thumb-bg bg-cm"></div>
@@ -329,6 +364,46 @@
         </div>
       </div>
 
+      <!-- 3. Partir & Revenir -->
+      <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_PARTIR_REVENIR','_blank')">
+        <div class="oeuvre-thumb">
+          <div class="oeuvre-thumb-bg bg-live"></div>
+          <div class="play-wrap"><div class="play-tri-sm"></div></div>
+          <div class="oeuvre-badge">Court métrage · 6'30</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">Partir & Revenir</div>
+          <div class="oeuvre-meta"><span>6 min 30</span><span>Écriture · Production · Réalisation</span></div>
+        </div>
+      </div>
+
+      <!-- 4. 21 Pij -->
+      <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_21_PIJ','_blank')">
+        <div class="oeuvre-thumb">
+          <div class="oeuvre-thumb-bg bg-cm"></div>
+          <div class="play-wrap"><div class="play-tri-sm"></div></div>
+          <div class="oeuvre-badge">Court métrage · 6'30</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">21 Pij</div>
+          <div class="oeuvre-meta"><span>6 min 30</span><span>Écriture · Production · Réalisation</span></div>
+        </div>
+      </div>
+
+      <!-- 5. La Pente Montante -->
+      <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_LA_PENTE_MONTANTE','_blank')">
+        <div class="oeuvre-thumb">
+          <div class="oeuvre-thumb-bg bg-anim"></div>
+          <div class="play-wrap"><div class="play-tri-sm"></div></div>
+          <div class="oeuvre-badge">Animation · 1'30</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">La Pente Montante</div>
+          <div class="oeuvre-meta"><span>1 min 30</span><span>Animation artisanale</span></div>
+        </div>
+      </div>
+
+      <!-- 6. Clip animé 2D couleur -->
       <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_CLIP_ANIME','_blank')">
         <div class="oeuvre-thumb">
           <div class="oeuvre-thumb-bg bg-anim"></div>
@@ -336,35 +411,12 @@
           <div class="oeuvre-badge">Animation · Clip</div>
         </div>
         <div class="oeuvre-body">
-          <div class="oeuvre-title">Clip animé</div>
+          <div class="oeuvre-title">Clip animé 2D couleur</div>
           <div class="oeuvre-meta"><span>Animation 2D couleur</span><span>Ombres, lumières, mer animée</span></div>
         </div>
       </div>
 
-      <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_COURTS_METRAGES','_blank')">
-        <div class="oeuvre-thumb">
-          <div class="oeuvre-thumb-bg bg-live"></div>
-          <div class="play-wrap"><div class="play-tri-sm"></div></div>
-          <div class="oeuvre-badge">Courts métrages · 2 × 6'30</div>
-        </div>
-        <div class="oeuvre-body">
-          <div class="oeuvre-title">Courts métrages live action</div>
-          <div class="oeuvre-meta"><span>6 min 30 chacun</span><span>Écriture · Production · Réalisation</span></div>
-        </div>
-      </div>
-
-      <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_CM_ANIME','_blank')">
-        <div class="oeuvre-thumb">
-          <div class="oeuvre-thumb-bg bg-anim"></div>
-          <div class="play-wrap"><div class="play-tri-sm"></div></div>
-          <div class="oeuvre-badge">Animation · 1'30</div>
-        </div>
-        <div class="oeuvre-body">
-          <div class="oeuvre-title">Court métrage animé</div>
-          <div class="oeuvre-meta"><span>1 min 30</span><span>Animation artisanale</span></div>
-        </div>
-      </div>
-
+      <!-- 7. Stand-up -->
       <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_STANDUP','_blank')">
         <div class="oeuvre-thumb">
           <div class="oeuvre-thumb-bg bg-standup"></div>
@@ -374,6 +426,35 @@
         <div class="oeuvre-body">
           <div class="oeuvre-title">« Les placards, c'est pas sensé bouger »</div>
           <div class="oeuvre-meta"><span>Comedy clubs</span><span>Métropole lyonnaise</span></div>
+        </div>
+      </div>
+
+      <!-- 8. Welcome to Wonderland — Roman / Projet littéraire -->
+      <!-- Pas de lien vidéo — retire onclick ou pointe vers une page/post Instagram -->
+      <div class="oeuvre" style="cursor:default;">
+        <div class="oeuvre-thumb">
+          <!-- Ajouter style="background-image:url('cover-wonderland.jpg')" sur la ligne suivante -->
+          <div class="oeuvre-thumb-bg bg-live" style="background: linear-gradient(135deg, #0a0610, #110818);"></div>
+          <div class="oeuvre-badge">Roman · Fantastique</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">Welcome to Wonderland</div>
+          <div class="oeuvre-meta"><span>En développement depuis 2020</span><span>Fiction fantastique · Worldbuilding</span></div>
+          <p style="font-size:0.78rem; color:#888; margin-top:0.7rem; line-height:1.6;">Le voyage d'Owie Lininyo dans Wonderland — là où toutes les créations de l'esprit humain coexistent dans une société imaginaire structurée. Personnages, arcs narratifs, bestiaire, mythes et légendes.</p>
+        </div>
+      </div>
+
+      <!-- 9. The Golden Rule — Roman / RomCom -->
+      <div class="oeuvre" style="cursor:default;">
+        <div class="oeuvre-thumb">
+          <!-- Ajouter style="background-image:url('cover-goldenrule.jpg')" sur la ligne suivante -->
+          <div class="oeuvre-thumb-bg" style="background: linear-gradient(135deg, #0d0a06, #1a1208);"></div>
+          <div class="oeuvre-badge">Roman · RomCom</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">The Golden Rule</div>
+          <div class="oeuvre-meta"><span>En développement</span><span>Romance · Comédie · Introspection</span></div>
+          <p style="font-size:0.78rem; color:#888; margin-top:0.7rem; line-height:1.6;">Salif réapprend à apprécier le monde extérieur en allant à la reconquête de son monde intérieur — en brisant les barrières que son environnement l'avait poussé à s'imposer.</p>
         </div>
       </div>
 
@@ -390,9 +471,9 @@
     </div>
     <div class="skills-grid">
       <div class="skill"><span class="skill-ico">✍</span><div class="skill-name">Écriture & narration</div><ul class="skill-items"><li>Écriture scénaristique</li><li>Construction d'univers</li><li>Deux projets de roman</li><li>Webcomic / BD</li><li>Stand-up</li></ul></div>
-      <div class="skill"><span class="skill-ico">🎬</span><div class="skill-name">Production & réalisation</div><ul class="skill-items"><li>Direction d'acteurs</li><li>Tournage & cadrage</li><li>Montage DaVinci Resolve</li><li>Auto-production</li><li>Organisation plateau</li></ul></div>
-      <div class="skill"><span class="skill-ico">🎨</span><div class="skill-name">Animation & visuels</div><ul class="skill-items"><li>Animation 2D artisanale</li><li>Ombres & lumières</li><li>Animation de fluides</li><li>Clip musical animé</li></ul></div>
-      <div class="skill"><span class="skill-ico">⚙</span><div class="skill-name">Gestion de projet</div><ul class="skill-items"><li>Product Owner</li><li>Pilote de projet (EDF)</li><li>Planning & coordination</li><li>Gestion d'équipe</li><li>Ingénieur IoT diplômé</li></ul></div>
+      <div class="skill"><span class="skill-ico">🎬</span><div class="skill-name">Production & réalisation</div><ul class="skill-items"><li>Direction d'acteurs</li><li>Tournage & cadrage</li><li>Montage DaVinci Resolve</li><li>Auto-production</li></ul></div>
+      <div class="skill"><span class="skill-ico">🎨</span><div class="skill-name">Animation & visuels</div><ul class="skill-items"><li>Animation 2D artisanale</li><li>Ombres & lumières</li><li>Animation de fluides</li><li>Carrousels & designs digitaux (Procreate, Canva)</li><li>Bande dessinée (Procreate)</li><li>Miniatures YouTube</li></ul></div>
+      <div class="skill"><span class="skill-ico">⚙</span><div class="skill-name">Gestion de projet</div><ul class="skill-items"><li>Product Owner</li><li>Pilote de projet (EDF)</li><li>Planning & coordination</li><li>Gestion d'équipe</li><li>Diplôme en réseaux et technologies de l'information</li></ul></div>
     </div>
   </div>
 </section>
@@ -409,7 +490,6 @@
       <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2023 – 2024</div><div class="tl-role">Head of Entertainment</div><div class="tl-org">Surf Camp — Moliets-et-Maâ</div><div class="tl-desc">Accueil, planning et animation des guests sur 5–6 mois. Organisation de deux éditions d'un festival de film. Production et réalisation de "The Fantastic Tale of Surfer Boy".</div></div>
       <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2022 – 2023</div><div class="tl-role">Pilote de projet digital</div><div class="tl-org">EDF — Groupe</div><div class="tl-desc">Coordination de projets digitaux en environnement grand groupe. Rigueur process, gestion multi-parties prenantes.</div></div>
       <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2021 – 2022</div><div class="tl-role">Product Owner</div><div class="tl-org">Epresspack</div><div class="tl-desc">Pilotage du backlog produit, définition des specs, collaboration dev/design. Environnement startup media tech.</div></div>
-      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2018 – 2021</div><div class="tl-role">Formation ingénieur + création en parallèle</div><div class="tl-org">École d'ingénieur · IoT & Smart Cities</div><div class="tl-desc">Diplôme obtenu. En parallèle : premiers courts métrages, écriture des univers narratifs, stand-up en comedy clubs lyonnais.</div></div>
     </div>
   </div>
 </section>
