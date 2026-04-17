@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Jil-Arnaud Koumba — Chef de projet créatif & Réalisateur.">
+<title>Jil-Arnaud Koumba</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noir: #090909;
+    --noir-soft: #111111;
+    --noir-card: #181818;
+    --accent: #E8C547;
+    --accent-dim: rgba(232,197,71,0.10);
+    --accent-border: rgba(232,197,71,0.28);
+    --blanc: #F2EDE4;
+    --gris: #777;
+    --gris-mid: #aaa;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--noir); color: var(--blanc); font-family: var(--sans); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: var(--noir); }
+  ::-webkit-scrollbar-thumb { background: var(--accent-border); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 5vw;
+    background: rgba(9,9,9,0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 0.5px solid rgba(255,255,255,0.05);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1rem; color: var(--accent); text-decoration: none; letter-spacing: 0.06em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--gris); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { background: var(--accent) !important; color: var(--noir) !important; padding: 0.45rem 1.1rem; font-weight: 500 !important; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    position: relative; overflow: hidden; padding: 8rem 5vw 5rem;
+  }
+  .hero-line { position: absolute; top: 0; bottom: 0; width: 0.5px; background: linear-gradient(to bottom, transparent, var(--accent-border), transparent); }
+  .hero-line:nth-child(1) { left: 33%; }
+  .hero-line:nth-child(2) { left: 66%; }
+  .hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; width: 100%; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
+  .hero-tag::before { content: ''; width: 36px; height: 0.5px; background: var(--accent); display: block; }
+  .hero-name { font-family: var(--serif); font-size: clamp(3.2rem, 8vw, 7rem); font-weight: 700; line-height: 0.95; margin-bottom: 0.6rem; }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-subtitle { font-family: var(--serif); font-size: clamp(1rem, 2.2vw, 1.5rem); font-style: italic; color: var(--gris); margin-bottom: 2.5rem; }
+  .hero-desc { max-width: 500px; color: var(--gris-mid); font-size: 0.97rem; line-height: 1.85; margin-bottom: 3rem; }
+  .hero-desc strong { color: var(--blanc); font-weight: 500; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-gold { background: var(--accent); color: var(--noir); padding: 0.9rem 2.2rem; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+  .btn-gold:hover { opacity: 0.85; }
+  .btn-outline { background: transparent; color: var(--blanc); padding: 0.9rem 2.2rem; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; border: 0.5px solid rgba(255,255,255,0.2); cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s, color 0.2s; }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-counters { position: absolute; right: 0; bottom: 3rem; display: flex; gap: 3.5rem; }
+  .counter { text-align: right; }
+  .counter-num { font-family: var(--serif); font-size: 2.8rem; line-height: 1; color: var(--accent); display: block; }
+  .counter-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gris); margin-top: 0.3rem; }
+
+  /* SECTIONS COMMUNES */
+  .sec { padding: 7rem 5vw; }
+  .sec-inner { max-width: 1100px; margin: 0 auto; }
+  .sec-eye { font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.9rem; }
+  .sec-eye::after { content: ''; flex: 1; max-width: 48px; height: 0.5px; background: var(--accent-border); }
+  .sec-h { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; line-height: 1.05; color: var(--blanc); }
+  .sec-h em { font-style: italic; color: var(--accent); }
+  .sec-sub { color: var(--gris); font-size: 0.93rem; max-width: 520px; margin-top: 0.8rem; line-height: 1.75; }
+  .sec-hd { margin-bottom: 3.5rem; }
+
+  /* VIDÉO */
+  .video-placeholder {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--noir-card);
+    border: 1px dashed var(--accent-border);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1.2rem;
+    margin-top: 3rem;
+  }
+  .video-placeholder-icon { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--accent-border); background: var(--accent-dim); display: flex; align-items: center; justify-content: center; }
+  .play-tri { width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 18px solid var(--accent); margin-left: 4px; }
+  .video-placeholder p { font-family: var(--serif); font-style: italic; color: var(--gris-mid); font-size: 1rem; }
+  .video-placeholder small { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); }
+  .video-caption { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 0.5px solid rgba(255,255,255,0.06); margin-top: 1rem; }
+  .video-caption-l { font-family: var(--serif); font-style: italic; font-size: 0.88rem; color: var(--gris-mid); }
+  .video-caption-r { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); }
+
+  /* VISION */
+  .vision-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: start; }
+  .vision-body p { color: #bbb; font-size: 0.95rem; line-height: 1.85; margin-bottom: 1.1rem; }
+  .vision-body strong { color: var(--blanc); font-weight: 500; }
+  .vision-quote { margin-top: 2.5rem; border-left: 2px solid var(--accent); padding: 1.5rem 2rem; background: var(--accent-dim); }
+  .vision-quote p { font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--blanc); line-height: 1.6; margin: 0; }
+  .pillars { display: flex; flex-direction: column; gap: 1rem; }
+  .pillar { padding: 1.4rem 1.5rem; background: var(--noir-card); border: 0.5px solid rgba(255,255,255,0.07); position: relative; overflow: hidden; transition: border-color 0.25s; }
+  .pillar:hover { border-color: var(--accent-border); }
+  .pillar::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent); }
+  .pillar-name { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.45rem; }
+  .pillar-desc { font-size: 0.87rem; color: #999; line-height: 1.6; }
+
+  /* OEUVRES */
+  .oeuvres-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .oeuvre { background: var(--noir-card); border: 0.5px solid rgba(255,255,255,0.07); overflow: hidden; transition: border-color 0.3s, transform 0.3s; cursor: pointer; }
+  .oeuvre:hover { border-color: var(--accent-border); transform: translateY(-3px); }
+  .oeuvre.wide { grid-column: span 2; }
+  .oeuvre-thumb { width: 100%; aspect-ratio: 16/9; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .oeuvre-thumb-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s; }
+  .oeuvre:hover .oeuvre-thumb-bg { transform: scale(1.05); }
+  .bg-serie   { background: linear-gradient(135deg, #080c16, #0d1020); }
+  .bg-cm      { background: linear-gradient(135deg, #120a06, #1a0e08); }
+  .bg-anim    { background: linear-gradient(135deg, #060d0c, #091210); }
+  .bg-live    { background: linear-gradient(135deg, #0d0810, #150c1a); }
+  .bg-standup { background: linear-gradient(135deg, #100806, #180d08); }
+  .play-wrap { position: relative; z-index: 2; width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--accent-border); background: rgba(232,197,71,0.1); display: flex; align-items: center; justify-content: center; transition: background 0.25s, border-color 0.25s; }
+  .oeuvre:hover .play-wrap { background: var(--accent); border-color: var(--accent); }
+  .play-tri-sm { width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 16px solid var(--accent); margin-left: 4px; transition: border-left-color 0.25s; }
+  .oeuvre:hover .play-tri-sm { border-left-color: var(--noir); }
+  .oeuvre-badge { position: absolute; top: 12px; left: 12px; z-index: 3; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; background: var(--accent); color: var(--noir); padding: 3px 10px; font-weight: 500; }
+  .oeuvre-body { padding: 1.2rem 1.4rem; }
+  .oeuvre-title { font-family: var(--serif); font-size: 1rem; color: var(--blanc); margin-bottom: 0.4rem; line-height: 1.3; }
+  .oeuvre-meta { font-size: 0.76rem; color: var(--gris); display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; }
+
+  /* COMPÉTENCES */
+  .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+  .skill { padding: 1.75rem 1.4rem; border: 0.5px solid rgba(255,255,255,0.07); background: var(--noir-card); transition: border-color 0.25s; }
+  .skill:hover { border-color: var(--accent-border); }
+  .skill-ico { font-size: 1.4rem; margin-bottom: 1rem; display: block; }
+  .skill-name { font-family: var(--serif); font-size: 0.98rem; color: var(--blanc); margin-bottom: 0.9rem; }
+  .skill-items { list-style: none; }
+  .skill-items li { font-size: 0.8rem; color: var(--gris); padding: 0.28rem 0; border-bottom: 0.5px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 8px; }
+  .skill-items li::before { content: ''; width: 4px; height: 4px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+
+  /* PARCOURS */
+  .timeline { position: relative; padding-left: 2.2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 0.5px; background: linear-gradient(to bottom, var(--accent), rgba(232,197,71,0.08)); }
+  .tl-item { position: relative; margin-bottom: 2.8rem; }
+  .tl-dot { position: absolute; left: -2.6rem; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(232,197,71,0.12); }
+  .tl-date { font-size: 0.69rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
+  .tl-role { font-family: var(--serif); font-size: 1.1rem; color: var(--blanc); margin-bottom: 0.18rem; }
+  .tl-org { font-size: 0.8rem; color: var(--gris); margin-bottom: 0.6rem; }
+  .tl-desc { font-size: 0.87rem; color: #999; max-width: 560px; line-height: 1.75; }
+
+  /* LE PROJET */
+  #projet { position: relative; overflow: hidden; }
+  #projet::after { content: ''; position: absolute; right: -15vw; top: 50%; transform: translateY(-50%); width: 55vw; height: 55vw; border-radius: 50%; background: radial-gradient(circle, rgba(232,197,71,0.03), transparent 65%); pointer-events: none; }
+  .projet-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5rem; align-items: center; }
+  .projet-text p { color: #bbb; font-size: 0.95rem; line-height: 1.85; margin-bottom: 1.1rem; }
+  .projet-text strong { color: var(--blanc); font-weight: 500; }
+  .projet-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+  .ptag { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border: 0.5px solid var(--accent-border); color: var(--accent); background: var(--accent-dim); }
+  .projet-card { aspect-ratio: 3/4; max-height: 480px; background: var(--noir-card); border: 0.5px solid rgba(255,255,255,0.07); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
+  .projet-card-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #060d09, #0a0a0a); display: flex; align-items: center; justify-content: center; }
+  .projet-card-symbol { font-family: var(--serif); font-size: 9rem; opacity: 0.07; color: var(--accent); line-height: 1; user-select: none; }
+  .projet-card-label { position: relative; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .projet-card-title { position: relative; font-family: var(--serif); font-size: 1.2rem; color: var(--blanc); line-height: 1.3; }
+  .projet-card-sub { position: relative; font-size: 0.78rem; color: var(--gris); margin-top: 0.5rem; }
+
+  /* CONTACT */
+  .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+  .contact-inner .sec-eye { justify-content: center; }
+  .contact-inner .sec-eye::after { display: none; }
+  .contact-body { color: var(--gris-mid); font-size: 0.95rem; line-height: 1.8; margin: 1rem 0 2.5rem; }
+  .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem; margin-bottom: 3rem; }
+  .contact-link { display: flex; align-items: center; gap: 0.7rem; padding: 0.9rem 1.8rem; background: var(--noir-card); border: 0.5px solid rgba(255,255,255,0.1); color: var(--blanc); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.06em; transition: border-color 0.2s, color 0.2s, transform 0.2s; }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .cl-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .footer { padding-top: 2.5rem; border-top: 0.5px solid rgba(255,255,255,0.06); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--gris); }
+  .footer span { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">J — A. Koumba</a>
+  <ul class="nav-links">
+    <li><a href="#presentation">Présentation</a></li>
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#oeuvres">Œuvres</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#projet">Le Projet</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-line"></div>
+  <div class="hero-line"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Chef de projet créatif · Réalisateur</div>
+    <h1 class="hero-name">Jil-Arnaud<br><em>Koumba</em></h1>
+    <p class="hero-subtitle">Ingénieur de formation. Créateur de vocation.</p>
+    <p class="hero-desc">
+      Je construis des histoires avec la même rigueur que des systèmes.<br>
+      <strong>6 ans à écrire, produire, filmer, diriger et monter</strong> — en parallèle d'un parcours d'ingénieur. Aujourd'hui, je mets cette double compétence au service de l'audiovisuel.
+    </p>
+    <div class="hero-actions">
+      <a href="#presentation" class="btn-gold">Voir ma présentation</a>
+      <a href="#contact" class="btn-outline">Me contacter</a>
+    </div>
+    <div class="hero-counters">
+      <div class="counter"><span class="counter-num">4</span><div class="counter-label">Courts métrages</div></div>
+      <div class="counter"><span class="counter-num">10</span><div class="counter-label">Épisodes série</div></div>
+      <div class="counter"><span class="counter-num">6</span><div class="counter-label">Ans de création</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     VIDÉO DE PRÉSENTATION
+     ══════════════════════════════════════════════════
+     QUAND TA VIDÉO EST PRÊTE :
+     1. Mets-la sur YouTube (non listée)
+     2. Récupère l'ID (ex: youtube.com/watch?v=ABC123 → ID = ABC123)
+     3. Supprime le bloc class="video-placeholder"
+     4. Décommente le bloc <div class="video-embed"> en dessous
+     5. Remplace YOUTUBE_VIDEO_ID par ton vrai ID
+     ══════════════════════════════════════════════════ -->
+<section id="presentation" class="sec" style="background:var(--noir-soft);">
+  <div class="sec-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">Ma présentation</div>
+      <h2 class="sec-h">Qui je suis —<br><em>en quelques minutes.</em></h2>
+      <p class="sec-sub">Mon parcours, ma vision, ce que je veux apporter à l'industrie audiovisuelle.</p>
+    </div>
+
+    <!-- PLACEHOLDER — supprimer quand vidéo branchée -->
+    <div class="video-placeholder">
+      <div class="video-placeholder-icon"><div class="play-tri"></div></div>
+      <p>Vidéo de présentation — à venir cette semaine</p>
+      <small>Remplacer par l'embed YouTube une fois tournée</small>
+    </div>
+
+    <!-- DÉCOMMENTER ET COMPLÉTER QUAND VIDÉO PRÊTE :
+    <div style="width:100%; aspect-ratio:16/9; margin-top:3rem; border:0.5px solid rgba(255,255,255,0.07);">
+      <iframe width="100%" height="100%"
+        src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID?rel=0&modestbranding=1"
+        title="Présentation Jil-Arnaud Koumba"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block;"></iframe>
+    </div>
+    -->
+
+    <div class="video-caption">
+      <span class="video-caption-l">Présentation professionnelle · Face caméra + B-rolls</span>
+      <span class="video-caption-r">Jil-Arnaud Koumba · 2024</span>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision" class="sec" style="background:var(--noir);">
+  <div class="sec-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">Qui je suis</div>
+      <h2 class="sec-h">Ingénieur, créateur —<br><em>les deux à la fois.</em></h2>
+    </div>
+    <div class="vision-layout">
+      <div class="vision-body">
+        <p>Diplômé ingénieur en <strong>IoT & Smart Cities</strong>, j'ai passé 6 ans à mener deux vies en parallèle : celle d'un professionnel structuré chez EDF et Epresspack, et celle d'un créateur qui écrit, tourne et monte ses propres œuvres.</p>
+        <p>J'ai produit des courts métrages, une série de 10 épisodes, un clip animé, des performances de stand-up. <strong>Pas des projets d'école. Des œuvres abouties, publiées, montrées.</strong></p>
+        <p>Aujourd'hui, je veux franchir l'étape suivante : entrer dans l'industrie audiovisuelle avec la rigueur d'un chef de projet et la vision d'un réalisateur.</p>
+        <div class="vision-quote">
+          <p>« Je ne veux pas choisir entre la structure et la créativité — c'est précisément cette tension qui définit ce que je veux apporter. »</p>
+        </div>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><div class="pillar-name">Rigueur</div><div class="pillar-desc">Gestion de projet, planification, coordination d'équipe — une méthode ancrée dans l'ingénierie, appliquée à la création.</div></div>
+        <div class="pillar"><div class="pillar-name">Vision</div><div class="pillar-desc">Deux univers narratifs construits depuis 6 ans. Une volonté de raconter l'Afrique par l'Afrique — par le fantastique et la culture gabonaise.</div></div>
+        <div class="pillar"><div class="pillar-name">Exécution</div><div class="pillar-desc">Pas seulement des idées. Des œuvres livrées : tournées, montées sur DaVinci Resolve, publiées. J'ai appris à finir ce que je commence.</div></div>
+        <div class="pillar"><div class="pillar-name">Présence</div><div class="pillar-desc">Stand-up en comedy clubs lyonnais. Head of Entertainment dans un surf camp 5 mois. Je sais tenir un public et créer l'énergie.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     ŒUVRES
+     ══════════════════════════════════════════════════
+     POUR CHAQUE CARTE :
+     • onclick="window.open('...')" → colle ton lien YouTube/Vimeo
+     • Sur .oeuvre-thumb-bg → ajoute style="background-image:url('image.jpg')"
+       pour afficher un vrai thumbnail à la place du fond coloré
+     ══════════════════════════════════════════════════ -->
+<section id="oeuvres" class="sec" style="background:var(--noir-soft);">
+  <div class="sec-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">Mes créations</div>
+      <h2 class="sec-h">Ce que j'ai <em>fait.</em></h2>
+      <p class="sec-sub">Des œuvres produites en dehors de tout cadre scolaire, de l'idée à la publication finale.</p>
+    </div>
+    <div class="oeuvres-grid">
+
+      <!-- The Last Summer — grande carte -->
+      <div class="oeuvre wide" onclick="window.open('LIEN_YOUTUBE_THE_LAST_SUMMER','_blank')">
+        <div class="oeuvre-thumb">
+          <!-- Ajouter style="background-image:url('thumbnail-last-summer.jpg')" sur la ligne suivante -->
+          <div class="oeuvre-thumb-bg bg-serie"></div>
+          <div class="play-wrap"><div class="play-tri-sm"></div></div>
+          <div class="oeuvre-badge">Série · 10 épisodes</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">The Last Summer</div>
+          <div class="oeuvre-meta"><span>~20 min / épisode</span><span>Réalisation · Montage DaVinci Resolve</span><span>Recherche de soi · Voyage</span></div>
+        </div>
+      </div>
+
+      <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_SURFER_BOY','_blank')">
+        <div class="oeuvre-thumb">
+          <div class="oeuvre-thumb-bg bg-cm"></div>
+          <div class="play-wrap"><div class="play-tri-sm"></div></div>
+          <div class="oeuvre-badge">Court métrage</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">The Fantastic Tale of Surfer Boy</div>
+          <div class="oeuvre-meta"><span>3–4 min</span><span>Écriture · Réalisation · Interprétation</span></div>
+        </div>
+      </div>
+
+      <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_CLIP_ANIME','_blank')">
+        <div class="oeuvre-thumb">
+          <div class="oeuvre-thumb-bg bg-anim"></div>
+          <div class="play-wrap"><div class="play-tri-sm"></div></div>
+          <div class="oeuvre-badge">Animation · Clip</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">Clip animé</div>
+          <div class="oeuvre-meta"><span>Animation 2D couleur</span><span>Ombres, lumières, mer animée</span></div>
+        </div>
+      </div>
+
+      <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_COURTS_METRAGES','_blank')">
+        <div class="oeuvre-thumb">
+          <div class="oeuvre-thumb-bg bg-live"></div>
+          <div class="play-wrap"><div class="play-tri-sm"></div></div>
+          <div class="oeuvre-badge">Courts métrages · 2 × 6'30</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">Courts métrages live action</div>
+          <div class="oeuvre-meta"><span>6 min 30 chacun</span><span>Écriture · Production · Réalisation</span></div>
+        </div>
+      </div>
+
+      <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_CM_ANIME','_blank')">
+        <div class="oeuvre-thumb">
+          <div class="oeuvre-thumb-bg bg-anim"></div>
+          <div class="play-wrap"><div class="play-tri-sm"></div></div>
+          <div class="oeuvre-badge">Animation · 1'30</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">Court métrage animé</div>
+          <div class="oeuvre-meta"><span>1 min 30</span><span>Animation artisanale</span></div>
+        </div>
+      </div>
+
+      <div class="oeuvre" onclick="window.open('LIEN_YOUTUBE_STANDUP','_blank')">
+        <div class="oeuvre-thumb">
+          <div class="oeuvre-thumb-bg bg-standup"></div>
+          <div class="play-wrap"><div class="play-tri-sm"></div></div>
+          <div class="oeuvre-badge">Stand-up · 5 min</div>
+        </div>
+        <div class="oeuvre-body">
+          <div class="oeuvre-title">« Les placards, c'est pas sensé bouger »</div>
+          <div class="oeuvre-meta"><span>Comedy clubs</span><span>Métropole lyonnaise</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences" class="sec" style="background:var(--noir);">
+  <div class="sec-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">Savoir-faire</div>
+      <h2 class="sec-h">Deux profils.<br><em>Une seule personne.</em></h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill"><span class="skill-ico">✍</span><div class="skill-name">Écriture & narration</div><ul class="skill-items"><li>Écriture scénaristique</li><li>Construction d'univers</li><li>Deux projets de roman</li><li>Webcomic / BD</li><li>Stand-up</li></ul></div>
+      <div class="skill"><span class="skill-ico">🎬</span><div class="skill-name">Production & réalisation</div><ul class="skill-items"><li>Direction d'acteurs</li><li>Tournage & cadrage</li><li>Montage DaVinci Resolve</li><li>Auto-production</li><li>Organisation plateau</li></ul></div>
+      <div class="skill"><span class="skill-ico">🎨</span><div class="skill-name">Animation & visuels</div><ul class="skill-items"><li>Animation 2D artisanale</li><li>Ombres & lumières</li><li>Animation de fluides</li><li>Clip musical animé</li></ul></div>
+      <div class="skill"><span class="skill-ico">⚙</span><div class="skill-name">Gestion de projet</div><ul class="skill-items"><li>Product Owner</li><li>Pilote de projet (EDF)</li><li>Planning & coordination</li><li>Gestion d'équipe</li><li>Ingénieur IoT diplômé</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours" class="sec" style="background:var(--noir-soft);">
+  <div class="sec-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">Expériences</div>
+      <h2 class="sec-h">Un chemin <em>non conventionnel.</em></h2>
+      <p class="sec-sub">De l'ingénierie à la création — chaque étape a nourri la suivante.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2023 – 2024</div><div class="tl-role">Head of Entertainment</div><div class="tl-org">Surf Camp — Moliets-et-Maâ</div><div class="tl-desc">Accueil, planning et animation des guests sur 5–6 mois. Organisation de deux éditions d'un festival de film. Production et réalisation de "The Fantastic Tale of Surfer Boy".</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2022 – 2023</div><div class="tl-role">Pilote de projet digital</div><div class="tl-org">EDF — Groupe</div><div class="tl-desc">Coordination de projets digitaux en environnement grand groupe. Rigueur process, gestion multi-parties prenantes.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2021 – 2022</div><div class="tl-role">Product Owner</div><div class="tl-org">Epresspack</div><div class="tl-desc">Pilotage du backlog produit, définition des specs, collaboration dev/design. Environnement startup media tech.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2018 – 2021</div><div class="tl-role">Formation ingénieur + création en parallèle</div><div class="tl-org">École d'ingénieur · IoT & Smart Cities</div><div class="tl-desc">Diplôme obtenu. En parallèle : premiers courts métrages, écriture des univers narratifs, stand-up en comedy clubs lyonnais.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LE PROJET -->
+<section id="projet" class="sec" style="background:var(--noir);">
+  <div class="sec-inner">
+    <div class="sec-hd">
+      <div class="sec-eye">La vision long terme</div>
+      <h2 class="sec-h">Un film d'animation<br><em>culturel et fort.</em></h2>
+    </div>
+    <div class="projet-layout">
+      <div class="projet-text">
+        <p>Depuis 6 ans, je construis deux univers narratifs. L'un d'eux — le plus dense, le plus ambitieux — est destiné à devenir un <strong>film d'animation ancré dans la culture gabonaise</strong>.</p>
+        <p>Dans un monde où les récits africains sont souvent racontés de l'extérieur, je veux construire une œuvre qui <strong>décolonise le regard</strong>, qui comble les trous laissés par l'histoire à travers le fantastique et l'imaginaire.</p>
+        <p>Ce n'est pas encore le projet d'aujourd'hui. C'est l'horizon qui donne du sens à chaque étape — y compris celle-ci : <strong>entrer dans l'industrie, apprendre, me former, travailler avec les meilleurs.</strong></p>
+        <div class="projet-tags">
+          <span class="ptag">Animation</span><span class="ptag">Culture gabonaise</span><span class="ptag">Fantastique</span><span class="ptag">Décolonisation des récits</span><span class="ptag">Worldbuilding</span>
+        </div>
+      </div>
+      <div class="projet-card">
+        <div class="projet-card-bg"><div class="projet-card-symbol">∞</div></div>
+        <div class="projet-card-label">En développement</div>
+        <div class="projet-card-title">Projet d'animation —<br>Univers gabonais</div>
+        <div class="projet-card-sub">Scénario & worldbuilding en construction depuis 6 ans</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CONTACT
+     Remplace les 3 href par tes vraies coordonnées :
+     • mailto:ton@email.com
+     • https://linkedin.com/in/ton-profil
+     • https://youtube.com/@ta-chaine
+     ══════════════════════════════════════════════════ -->
+<section id="contact" class="sec" style="background:var(--noir-soft);">
+  <div class="sec-inner">
+    <div class="contact-inner">
+      <div class="sec-eye">Travaillons ensemble</div>
+      <h2 class="sec-h">Prêt à <em>contribuer.</em></h2>
+      <p class="contact-body">Chef de projet créatif disponible pour des postes en production audiovisuelle, alternance et collaborations.</p>
+      <div class="contact-links">
+        <a href="mailto:TON_EMAIL" class="contact-link"><span class="cl-dot"></span>Email</a>
+        <a href="https://linkedin.com/in/TON_PROFIL" class="contact-link" target="_blank"><span class="cl-dot"></span>LinkedIn</a>
+        <a href="https://youtube.com/@TA_CHAINE" class="contact-link" target="_blank"><span class="cl-dot"></span>YouTube</a>
+      </div>
+      <div class="footer"><span>Jil-Arnaud Koumba</span> — Chef de projet créatif & Réalisateur · Lyon</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
